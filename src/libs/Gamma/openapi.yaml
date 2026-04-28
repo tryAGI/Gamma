@@ -1,0 +1,762 @@
+openapi: 3.0.0
+info:
+  title: Gamma Public API
+  version: '1.0'
+  description: Generate presentations, documents, webpages, and social posts with
+    Gamma.
+tags:
+- name: public-api
+  description: Public API endpoints for external integrations
+servers:
+- url: https://public-api.gamma.app
+  description: Production
+security:
+- api-key: []
+components:
+  securitySchemes:
+    api-key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication
+  schemas:
+    FromTemplateGeneration:
+      type: object
+      properties:
+        exportAs:
+          type: string
+          description: Export format for automatic export after generation
+          enum:
+          - pptx
+          - pdf
+          - png
+        prompt:
+          type: string
+          description: Text prompt describing what to generate
+          minLength: 1
+          maxLength: 400000
+        gammaId:
+          type: string
+          description: The File ID of the gamma to be used as a template. The File
+            must contain exactly one Page.
+        themeId:
+          type: string
+          description: Theme ID to apply to the generated Gamma
+        imageOptions:
+          description: Image generation options
+          allOf:
+          - $ref: '#/components/schemas/FromTemplateImageOptions'
+        sharingOptions:
+          description: Sharing and permissions options
+          allOf:
+          - $ref: '#/components/schemas/SharingOptions'
+        folderIds:
+          description: Folder IDs to place the generated Gamma in
+          maxItems: 10
+          type: array
+          items:
+            type: string
+      required:
+      - prompt
+      - gammaId
+    FromTemplateImageOptions:
+      type: object
+      properties:
+        model:
+          description: AI model for image generation
+          allOf:
+          - $ref: '#/components/schemas/ImageModel'
+        style:
+          type: string
+          description: Style description for images
+          minLength: 0
+          maxLength: 5000
+    ImageModel:
+      type: string
+      enum:
+      - dall-e-3
+      - imagen-3-flash
+      - imagen-3-pro
+      - imagen-4-pro
+      - imagen-4-ultra
+      - ideogram-v3
+      - ideogram-v3-turbo
+      - ideogram-v3-quality
+      - flux-1-pro
+      - flux-1-quick
+      - flux-1-ultra
+      - flux-kontext-pro
+      - flux-kontext-max
+      - flux-kontext-fast
+      - leonardo-phoenix
+      - recraft-v3
+      - recraft-v3-svg
+      - recraft-v4
+      - recraft-v4-svg
+      - recraft-v4-pro
+      - luma-photon-1
+      - luma-photon-flash-1
+      - gpt-image-1-medium
+      - gpt-image-1-high
+      - gpt-image-1-mini-low
+      - gpt-image-1-mini-medium
+      - gpt-image-1-mini-high
+      - gpt-image-2-mini
+      - gpt-image-2
+      - gpt-image-2-hd
+      - gemini-2.5-flash-image
+      - veo-3.1-fast
+      - veo-3.1
+      - luma-ray-2-flash
+      - luma-ray-2
+      - leonardo-motion-2-fast
+      - leonardo-motion-2
+      - gemini-3-pro-image
+      - gemini-3-pro-image-hd
+      - gemini-3.1-flash-image-mini
+      - gemini-3.1-flash-image
+      - gemini-3.1-flash-image-hd
+      - flux-2-pro
+      - flux-2-flex
+      - flux-2-max
+      - flux-2-klein
+      description: AI model to use for image generation
+    SharingOptions:
+      type: object
+      properties:
+        workspaceAccess:
+          type: string
+          description: Default access level for workspace members
+          enum:
+          - edit
+          - comment
+          - view
+          - noAccess
+          - fullAccess
+        externalAccess:
+          type: string
+          description: Access level for external users (via shared link)
+          enum:
+          - edit
+          - comment
+          - view
+          - noAccess
+        emailOptions:
+          description: Email sharing configuration
+          allOf:
+          - $ref: '#/components/schemas/EmailOptions'
+    EmailOptions:
+      type: object
+      properties:
+        access:
+          type: string
+          description: Permission level for email recipients
+          enum:
+          - edit
+          - comment
+          - view
+          - fullAccess
+        recipients:
+          description: Email addresses to share with
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: email
+      required:
+      - recipients
+    FromTemplateGenerationResponse:
+      type: object
+      properties:
+        generationId:
+          type: string
+          description: Unique identifier for the generation job
+        warnings:
+          type: string
+          description: Warnings about the request
+      required:
+      - generationId
+    Generation:
+      type: object
+      properties:
+        textMode:
+          type: string
+          description: How to interpret the input text
+          enum:
+          - generate
+          - condense
+          - preserve
+        format:
+          type: string
+          description: Output format for the generated Gamma
+          enum:
+          - presentation
+          - document
+          - social
+          - webpage
+        cardSplit:
+          type: string
+          description: How to split content across cards
+          enum:
+          - inputTextBreaks
+          - auto
+        exportAs:
+          type: string
+          description: Export format for automatic export after generation
+          enum:
+          - pptx
+          - pdf
+          - png
+        inputText:
+          type: string
+          description: The text content to generate from (topic, outline, or full
+            content)
+          minLength: 1
+          maxLength: 400000
+        additionalInstructions:
+          type: string
+          description: Additional instructions for the AI
+          minLength: 0
+          maxLength: 5000
+        numCards:
+          type: number
+          description: Target number of cards/slides to generate
+          minimum: 1
+        themeId:
+          type: string
+          description: Theme ID to apply (from /themes endpoint)
+        textOptions:
+          description: Text generation options
+          allOf:
+          - $ref: '#/components/schemas/TextOptions'
+        imageOptions:
+          description: Image generation and selection options
+          allOf:
+          - $ref: '#/components/schemas/ImageOptions'
+        cardOptions:
+          description: Card dimensions and layout options
+          allOf:
+          - $ref: '#/components/schemas/CardOptions'
+        sharingOptions:
+          description: Sharing and permissions options
+          allOf:
+          - $ref: '#/components/schemas/SharingOptions'
+        folderIds:
+          description: Folder IDs to place the generated Gamma in
+          maxItems: 10
+          type: array
+          items:
+            type: string
+      required:
+      - inputText
+    TextOptions:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Controls the amount of text generated per card
+          enum:
+          - brief
+          - medium
+          - detailed
+          - extensive
+        language:
+          type: string
+          description: Language code for the generated content
+          enum:
+          - en
+          - en-gb
+          - en-in
+          - es
+          - es-es
+          - es-mx
+          - es-419
+          - ca
+          - fr
+          - zh-cn
+          - zh-tw
+          - ko
+          - ja
+          - ja-da
+          - pt-br
+          - pt-pt
+          - de
+          - it
+          - ru
+          - pl
+          - uk
+          - ro
+          - hu
+          - cs
+          - el
+          - tr
+          - ar
+          - ar-sa
+          - he
+          - fa
+          - nl
+          - sv
+          - da
+          - nb
+          - fi
+          - id
+          - vi
+          - hi
+          - gu
+          - mr
+          - te
+          - bn
+          - ta
+          - ur
+          - kn
+          - ml
+          - th
+          - sr
+          - hr
+          - sq
+          - bg
+          - sl
+          - bs
+          - mk
+          - sw
+          - ha
+          - yo
+          - tl
+          - ms
+          - kk
+          - uz
+          - af
+          - lv
+          - lt
+          - et
+          - is
+          - cy
+        tone:
+          type: string
+          description: The tone or writing style for the generated text
+          minLength: 0
+          maxLength: 500
+        audience:
+          type: string
+          description: The target audience for the content
+          minLength: 0
+          maxLength: 500
+    ImageOptions:
+      type: object
+      properties:
+        model:
+          description: AI model to use for image generation
+          allOf:
+          - $ref: '#/components/schemas/ImageModel'
+        source:
+          type: string
+          description: 'Source for images: AI-generated or web search'
+          enum:
+          - webAllImages
+          - webFreeToUse
+          - webFreeToUseCommercially
+          - aiGenerated
+          - pictographic
+          - giphy
+          - pexels
+          - placeholder
+          - noImages
+          - themeAccent
+        style:
+          type: string
+          description: Style description for AI-generated images
+          minLength: 0
+          maxLength: 5000
+    CardOptions:
+      type: object
+      properties:
+        dimensions:
+          type: string
+          description: Card aspect ratio/dimensions
+          enum:
+          - fluid
+          - 16x9
+          - 4x3
+          - pageless
+          - letter
+          - a4
+          - 1x1
+          - 4x5
+          - 9x16
+        headerFooter:
+          description: Header and footer configuration
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooter'
+    HeaderFooter:
+      type: object
+      properties:
+        topLeft:
+          description: Element in top-left position
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooterElement'
+        topCenter:
+          description: Element in top-center position
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooterElement'
+        topRight:
+          description: Element in top-right position
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooterElement'
+        bottomLeft:
+          description: Element in bottom-left position
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooterElement'
+        bottomCenter:
+          description: Element in bottom-center position
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooterElement'
+        bottomRight:
+          description: Element in bottom-right position
+          allOf:
+          - $ref: '#/components/schemas/HeaderFooterElement'
+        hideFromFirstCard:
+          type: boolean
+          description: Hide header/footer from the first card (title card)
+        hideFromLastCard:
+          type: boolean
+          description: Hide header/footer from the last card
+    HeaderFooterElement:
+      type: object
+      properties:
+        type:
+          type: object
+          description: Type of element to display
+        source:
+          type: object
+          description: Image source type (required when type is "image")
+        src:
+          type: string
+          description: Custom image URL (required when source is "custom")
+          format: uri
+          minLength: 1
+          maxLength: 2048
+        value:
+          type: string
+          description: Text content (required when type is "text")
+          minLength: 1
+          maxLength: 500
+        size:
+          type: object
+          description: Size of the image element
+      required:
+      - type
+    CreateGenerationResponse:
+      type: object
+      properties:
+        generationId:
+          type: string
+          description: Unique identifier for the generation job
+        warnings:
+          type: string
+          description: Warnings about the request (e.g., ignored parameters)
+      required:
+      - generationId
+    GenerationStatusResponse:
+      type: object
+      properties:
+        generationId:
+          type: string
+          description: Unique identifier for the generation job
+        status:
+          type: object
+          description: Current status of the generation job
+        gammaId:
+          type: string
+          description: File ID of the generated Gamma (when completed)
+        gammaUrl:
+          type: string
+          description: URL to the generated Gamma (when completed)
+        error:
+          description: Error details (when failed)
+          allOf:
+          - $ref: '#/components/schemas/ErrorResponse'
+        exportUrl:
+          type: string
+          description: URL to download exported file (when exportAs was specified)
+        credits:
+          description: Credit usage information
+          allOf:
+          - $ref: '#/components/schemas/CreditsResponse'
+      required:
+      - generationId
+      - status
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+        statusCode:
+          type: number
+          description: HTTP status code
+      required:
+      - message
+      - statusCode
+    CreditsResponse:
+      type: object
+      properties:
+        deducted:
+          type: number
+          description: Number of credits deducted for this operation
+        remaining:
+          type: number
+          description: Remaining credits in the workspace
+      required:
+      - deducted
+      - remaining
+    ListFoldersResponse:
+      type: object
+      properties:
+        data:
+          description: Array of folder items
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderItem'
+        hasMore:
+          type: boolean
+          description: Whether more results exist beyond this page
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor for fetching the next page (null if no more results)
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    FolderItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique folder identifier
+        name:
+          type: string
+          description: Display name of the folder
+      required:
+      - id
+      - name
+    ListThemesResponse:
+      type: object
+      properties:
+        data:
+          description: Array of theme items
+          type: array
+          items:
+            $ref: '#/components/schemas/ThemeItem'
+        hasMore:
+          type: boolean
+          description: Whether more results exist beyond this page
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor for fetching the next page (null if no more results)
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    ThemeItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique theme identifier
+        name:
+          type: string
+          description: Display name of the theme
+        colorKeywords:
+          description: Keywords describing the theme's color palette
+          type: array
+          items:
+            type: string
+        toneKeywords:
+          description: Keywords describing the theme's tone/style
+          type: array
+          items:
+            type: string
+        type:
+          type: object
+          description: 'Theme type: standard (built-in) or custom (workspace-created)'
+      required:
+      - id
+      - name
+      - type
+paths:
+  /v1.0/generations/from-template:
+    post:
+      description: Creates an asynchronous generation job from a template Gamma with
+        variable substitution.
+      operationId: createFromTemplateGeneration
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FromTemplateGeneration'
+      responses:
+        '200':
+          description: Generation job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FromTemplateGenerationResponse'
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FromTemplateGenerationResponse'
+        '400':
+          description: Invalid request or template not found
+        '401':
+          description: Invalid or missing API key
+        '402':
+          description: Insufficient credits
+        '403':
+          description: Feature not enabled for workspace
+      summary: Create generation from template
+      tags:
+      - public-api
+  /v1.0/generations:
+    post:
+      description: Creates an asynchronous generation job from provided text input.
+        Returns a generation ID that can be used to poll for status.
+      operationId: createGeneration
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Generation'
+      responses:
+        '200':
+          description: Generation job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGenerationResponse'
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGenerationResponse'
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Invalid or missing API key
+        '402':
+          description: Insufficient credits
+        '403':
+          description: Access denied or feature not available
+      summary: Create async generation
+      tags:
+      - public-api
+  /v1.0/generations/{id}:
+    get:
+      description: Retrieves the current status of a generation job. Poll this endpoint
+        until status is "completed" or "failed".
+      operationId: getGenerationStatus
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The unique generation ID returned from the create endpoint
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Generation status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationStatusResponse'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: Generation not found
+      summary: Get generation status
+      tags:
+      - public-api
+  /v1.0/folders:
+    get:
+      description: Lists all folders the authenticated user is a member of within
+        the workspace.
+      operationId: listFolders
+      parameters:
+      - name: query
+        required: false
+        in: query
+        description: Search query to filter folders by name
+        schema:
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: Maximum number of folders to return
+        schema:
+          minimum: 1
+          maximum: 50
+          type: number
+      - name: after
+        required: false
+        in: query
+        description: Cursor for pagination (from previous response's nextCursor)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Folders retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFoldersResponse'
+        '401':
+          description: Invalid or missing API key
+      summary: List folders
+      tags:
+      - public-api
+  /v1.0/themes:
+    get:
+      description: Lists all themes available to the workspace, including standard
+        themes and custom workspace themes.
+      operationId: listThemes
+      parameters:
+      - name: query
+        required: false
+        in: query
+        description: Search query to filter themes by name
+        schema:
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: Maximum number of themes to return
+        schema:
+          minimum: 1
+          maximum: 50
+          type: number
+      - name: after
+        required: false
+        in: query
+        description: Cursor for pagination (from previous response's nextCursor)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Themes retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListThemesResponse'
+        '401':
+          description: Invalid or missing API key
+      summary: List themes
+      tags:
+      - public-api
