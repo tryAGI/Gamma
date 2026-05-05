@@ -62,6 +62,33 @@ namespace Gamma
             global::Gamma.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+            var __response = await ListFoldersAsResponseAsync(
+                query: query,
+                limit: limit,
+                after: after,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// List folders<br/>
+        /// Lists all folders the authenticated user is a member of within the workspace.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="limit"></param>
+        /// <param name="after"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Gamma.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Gamma.AutoSDKHttpResponse<global::Gamma.ListFoldersResponse>> ListFoldersAsResponseAsync(
+            string? query = default,
+            double? limit = default,
+            string? after = default,
+            global::Gamma.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
             PrepareArguments(
                 client: HttpClient);
             PrepareListFoldersArguments(
@@ -92,13 +119,14 @@ namespace Gamma
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Gamma.PathBuilder(
                                 path: "/v1.0/folders",
-                                baseUri: HttpClient.BaseAddress); 
+                                baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddOptionalParameter("query", query)
                                 .AddOptionalParameter("limit", limit?.ToString())
-                                .AddOptionalParameter("after", after) 
+                                .AddOptionalParameter("after", after)
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::Gamma.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -172,6 +200,8 @@ namespace Gamma
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -182,6 +212,11 @@ namespace Gamma
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Gamma.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Gamma.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -199,6 +234,8 @@ namespace Gamma
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -208,8 +245,7 @@ namespace Gamma
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Gamma.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -218,6 +254,11 @@ namespace Gamma
                         __attempt < __maxAttempts &&
                         global::Gamma.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Gamma.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Gamma.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Gamma.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -234,14 +275,15 @@ namespace Gamma
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Gamma.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -281,6 +323,8 @@ namespace Gamma
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -301,6 +345,8 @@ namespace Gamma
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
@@ -358,9 +404,13 @@ namespace Gamma
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        global::Gamma.ListFoldersResponse.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::Gamma.ListFoldersResponse.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::Gamma.AutoSDKHttpResponse<global::Gamma.ListFoldersResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Gamma.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -388,9 +438,13 @@ namespace Gamma
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        await global::Gamma.ListFoldersResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::Gamma.ListFoldersResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::Gamma.AutoSDKHttpResponse<global::Gamma.ListFoldersResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Gamma.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

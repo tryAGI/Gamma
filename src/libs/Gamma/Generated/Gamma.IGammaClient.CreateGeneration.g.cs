@@ -21,6 +21,19 @@ namespace Gamma
         /// Create async generation<br/>
         /// Creates an asynchronous generation job from provided text input. Returns a generation ID that can be used to poll for status.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Gamma.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Gamma.AutoSDKHttpResponse<global::Gamma.CreateGenerationResponse>> CreateGenerationAsResponseAsync(
+
+            global::Gamma.Generation request,
+            global::Gamma.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Create async generation<br/>
+        /// Creates an asynchronous generation job from provided text input. Returns a generation ID that can be used to poll for status.
+        /// </summary>
         /// <param name="textMode">
         /// How to interpret the input text
         /// </param>
