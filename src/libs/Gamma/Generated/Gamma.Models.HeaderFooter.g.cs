@@ -118,5 +118,6 @@ namespace Gamma
         public HeaderFooter()
         {
         }
+
     }
 }

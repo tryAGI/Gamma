@@ -178,5 +178,6 @@ namespace Gamma
         public Generation()
         {
         }
+
     }
 }

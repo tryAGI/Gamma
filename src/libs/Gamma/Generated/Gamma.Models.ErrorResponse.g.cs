@@ -54,5 +54,6 @@ namespace Gamma
         public ErrorResponse()
         {
         }
+
     }
 }
