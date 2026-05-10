@@ -109,5 +109,6 @@ namespace Gamma
         public GenerationStatusResponse()
         {
         }
+
     }
 }

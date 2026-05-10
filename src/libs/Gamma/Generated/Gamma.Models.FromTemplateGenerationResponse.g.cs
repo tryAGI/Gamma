@@ -53,5 +53,6 @@ namespace Gamma
         public FromTemplateGenerationResponse()
         {
         }
+
     }
 }

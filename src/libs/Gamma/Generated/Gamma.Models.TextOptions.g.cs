@@ -76,5 +76,6 @@ namespace Gamma
         public TextOptions()
         {
         }
+
     }
 }
