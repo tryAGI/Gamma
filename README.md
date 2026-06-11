@@ -40,6 +40,13 @@ using Gamma;
 using var client = new GammaClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global Gamma.CLI --prerelease
+gamma api --help
+```
+
 <!-- EXAMPLES:START -->
 <!-- EXAMPLES:END -->
 
