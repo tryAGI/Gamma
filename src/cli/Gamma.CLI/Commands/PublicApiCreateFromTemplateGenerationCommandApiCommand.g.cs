@@ -132,8 +132,9 @@ Creates an asynchronous generation job from a template Gamma with variable subst
                             __sharingOptionsSpecified || __sharingOptionsBase is not null
                                 ? new global::Gamma.SharingOptions
                                 {
-                                WorkspaceAccess = sharingOptionsWorkspaceAccess,
+	                                WorkspaceAccess = sharingOptionsWorkspaceAccess,
                                 ExternalAccess = sharingOptionsExternalAccess,
+
                                 }
                                 : __sharingOptionsBase;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);

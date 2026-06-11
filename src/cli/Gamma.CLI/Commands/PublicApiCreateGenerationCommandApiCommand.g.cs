@@ -179,8 +179,9 @@ Creates an asynchronous generation job from provided text input. Returns a gener
                             __sharingOptionsSpecified || __sharingOptionsBase is not null
                                 ? new global::Gamma.SharingOptions
                                 {
-                                WorkspaceAccess = sharingOptionsWorkspaceAccess,
+	                                WorkspaceAccess = sharingOptionsWorkspaceAccess,
                                 ExternalAccess = sharingOptionsExternalAccess,
+
                                 }
                                 : __sharingOptionsBase;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
