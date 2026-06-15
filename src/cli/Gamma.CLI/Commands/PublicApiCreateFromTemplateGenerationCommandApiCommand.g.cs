@@ -118,15 +118,15 @@ Creates an asynchronous generation job from a template Gamma with variable subst
                             RequestFile,
                             global::Gamma.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
-                        var exportAs = CliRuntime.WasSpecified(parseResult, ExportAs) ? parseResult.GetValue(ExportAs) : __requestBase is not null ? __requestBase.ExportAs : default;
+                        var exportAs = CliRuntime.WasSpecified(parseResult, ExportAs) ? parseResult.GetValue(ExportAs) : (__requestBase is { } __ExportAsBaseValue ? __ExportAsBaseValue.ExportAs : default);
                         var prompt = parseResult.GetRequiredValue(Prompt);
                         var gammaId = parseResult.GetRequiredValue(GammaId);
-                        var themeId = CliRuntime.WasSpecified(parseResult, ThemeId) ? parseResult.GetValue(ThemeId) : __requestBase is not null ? __requestBase.ThemeId : default;
-                        var imageOptions = CliRuntime.WasSpecified(parseResult, ImageOptions) ? parseResult.GetValue(ImageOptions) : __requestBase is not null ? __requestBase.ImageOptions : default;
-                        var folderIds = CliRuntime.WasSpecified(parseResult, FolderIds) ? parseResult.GetValue(FolderIds) : __requestBase is not null ? __requestBase.FolderIds : default;
+                        var themeId = CliRuntime.WasSpecified(parseResult, ThemeId) ? parseResult.GetValue(ThemeId) : (__requestBase is { } __ThemeIdBaseValue ? __ThemeIdBaseValue.ThemeId : default);
+                        var imageOptions = CliRuntime.WasSpecified(parseResult, ImageOptions) ? parseResult.GetValue(ImageOptions) : (__requestBase is { } __ImageOptionsBaseValue ? __ImageOptionsBaseValue.ImageOptions : default);
+                        var folderIds = CliRuntime.WasSpecified(parseResult, FolderIds) ? parseResult.GetValue(FolderIds) : (__requestBase is { } __FolderIdsBaseValue ? __FolderIdsBaseValue.FolderIds : default);
 
-                        var __sharingOptionsBase = __requestBase?.SharingOptions;                        var sharingOptionsWorkspaceAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) ? parseResult.GetValue(SharingOptionsOptions.WorkspaceAccess) : __sharingOptionsBase is not null ? __sharingOptionsBase.WorkspaceAccess : default;
-                        var sharingOptionsExternalAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess) ? parseResult.GetValue(SharingOptionsOptions.ExternalAccess) : __sharingOptionsBase is not null ? __sharingOptionsBase.ExternalAccess : default;
+                        var __sharingOptionsBase = __requestBase is { } __SharingOptionsBaseValue ? __SharingOptionsBaseValue.SharingOptions : default;                        var sharingOptionsWorkspaceAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) ? parseResult.GetValue(SharingOptionsOptions.WorkspaceAccess) : (__sharingOptionsBase is { } __SharingOptionsworkspaceAccessBaseValue ? __SharingOptionsworkspaceAccessBaseValue.WorkspaceAccess : default);
+                        var sharingOptionsExternalAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess) ? parseResult.GetValue(SharingOptionsOptions.ExternalAccess) : (__sharingOptionsBase is { } __SharingOptionsexternalAccessBaseValue ? __SharingOptionsexternalAccessBaseValue.ExternalAccess : default);
                         var __sharingOptionsSpecified = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) || CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess);
                         var sharingOptions =
                             __sharingOptionsSpecified || __sharingOptionsBase is not null

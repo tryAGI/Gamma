@@ -159,21 +159,21 @@ Creates an asynchronous generation job from provided text input. Returns a gener
                             RequestFile,
                             global::Gamma.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
-                        var textMode = CliRuntime.WasSpecified(parseResult, TextMode) ? parseResult.GetValue(TextMode) : __requestBase is not null ? __requestBase.TextMode : default;
-                        var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : __requestBase is not null ? __requestBase.Format : default;
-                        var cardSplit = CliRuntime.WasSpecified(parseResult, CardSplit) ? parseResult.GetValue(CardSplit) : __requestBase is not null ? __requestBase.CardSplit : default;
-                        var exportAs = CliRuntime.WasSpecified(parseResult, ExportAs) ? parseResult.GetValue(ExportAs) : __requestBase is not null ? __requestBase.ExportAs : default;
+                        var textMode = CliRuntime.WasSpecified(parseResult, TextMode) ? parseResult.GetValue(TextMode) : (__requestBase is { } __TextModeBaseValue ? __TextModeBaseValue.TextMode : default);
+                        var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : (__requestBase is { } __FormatBaseValue ? __FormatBaseValue.Format : default);
+                        var cardSplit = CliRuntime.WasSpecified(parseResult, CardSplit) ? parseResult.GetValue(CardSplit) : (__requestBase is { } __CardSplitBaseValue ? __CardSplitBaseValue.CardSplit : default);
+                        var exportAs = CliRuntime.WasSpecified(parseResult, ExportAs) ? parseResult.GetValue(ExportAs) : (__requestBase is { } __ExportAsBaseValue ? __ExportAsBaseValue.ExportAs : default);
                         var inputText = parseResult.GetRequiredValue(InputText);
-                        var additionalInstructions = CliRuntime.WasSpecified(parseResult, AdditionalInstructions) ? parseResult.GetValue(AdditionalInstructions) : __requestBase is not null ? __requestBase.AdditionalInstructions : default;
-                        var numCards = CliRuntime.WasSpecified(parseResult, NumCards) ? parseResult.GetValue(NumCards) : __requestBase is not null ? __requestBase.NumCards : default;
-                        var themeId = CliRuntime.WasSpecified(parseResult, ThemeId) ? parseResult.GetValue(ThemeId) : __requestBase is not null ? __requestBase.ThemeId : default;
-                        var textOptions = CliRuntime.WasSpecified(parseResult, TextOptions) ? parseResult.GetValue(TextOptions) : __requestBase is not null ? __requestBase.TextOptions : default;
-                        var imageOptions = CliRuntime.WasSpecified(parseResult, ImageOptions) ? parseResult.GetValue(ImageOptions) : __requestBase is not null ? __requestBase.ImageOptions : default;
-                        var cardOptions = CliRuntime.WasSpecified(parseResult, CardOptions) ? parseResult.GetValue(CardOptions) : __requestBase is not null ? __requestBase.CardOptions : default;
-                        var folderIds = CliRuntime.WasSpecified(parseResult, FolderIds) ? parseResult.GetValue(FolderIds) : __requestBase is not null ? __requestBase.FolderIds : default;
+                        var additionalInstructions = CliRuntime.WasSpecified(parseResult, AdditionalInstructions) ? parseResult.GetValue(AdditionalInstructions) : (__requestBase is { } __AdditionalInstructionsBaseValue ? __AdditionalInstructionsBaseValue.AdditionalInstructions : default);
+                        var numCards = CliRuntime.WasSpecified(parseResult, NumCards) ? parseResult.GetValue(NumCards) : (__requestBase is { } __NumCardsBaseValue ? __NumCardsBaseValue.NumCards : default);
+                        var themeId = CliRuntime.WasSpecified(parseResult, ThemeId) ? parseResult.GetValue(ThemeId) : (__requestBase is { } __ThemeIdBaseValue ? __ThemeIdBaseValue.ThemeId : default);
+                        var textOptions = CliRuntime.WasSpecified(parseResult, TextOptions) ? parseResult.GetValue(TextOptions) : (__requestBase is { } __TextOptionsBaseValue ? __TextOptionsBaseValue.TextOptions : default);
+                        var imageOptions = CliRuntime.WasSpecified(parseResult, ImageOptions) ? parseResult.GetValue(ImageOptions) : (__requestBase is { } __ImageOptionsBaseValue ? __ImageOptionsBaseValue.ImageOptions : default);
+                        var cardOptions = CliRuntime.WasSpecified(parseResult, CardOptions) ? parseResult.GetValue(CardOptions) : (__requestBase is { } __CardOptionsBaseValue ? __CardOptionsBaseValue.CardOptions : default);
+                        var folderIds = CliRuntime.WasSpecified(parseResult, FolderIds) ? parseResult.GetValue(FolderIds) : (__requestBase is { } __FolderIdsBaseValue ? __FolderIdsBaseValue.FolderIds : default);
 
-                        var __sharingOptionsBase = __requestBase?.SharingOptions;                        var sharingOptionsWorkspaceAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) ? parseResult.GetValue(SharingOptionsOptions.WorkspaceAccess) : __sharingOptionsBase is not null ? __sharingOptionsBase.WorkspaceAccess : default;
-                        var sharingOptionsExternalAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess) ? parseResult.GetValue(SharingOptionsOptions.ExternalAccess) : __sharingOptionsBase is not null ? __sharingOptionsBase.ExternalAccess : default;
+                        var __sharingOptionsBase = __requestBase is { } __SharingOptionsBaseValue ? __SharingOptionsBaseValue.SharingOptions : default;                        var sharingOptionsWorkspaceAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) ? parseResult.GetValue(SharingOptionsOptions.WorkspaceAccess) : (__sharingOptionsBase is { } __SharingOptionsworkspaceAccessBaseValue ? __SharingOptionsworkspaceAccessBaseValue.WorkspaceAccess : default);
+                        var sharingOptionsExternalAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess) ? parseResult.GetValue(SharingOptionsOptions.ExternalAccess) : (__sharingOptionsBase is { } __SharingOptionsexternalAccessBaseValue ? __SharingOptionsexternalAccessBaseValue.ExternalAccess : default);
                         var __sharingOptionsSpecified = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) || CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess);
                         var sharingOptions =
                             __sharingOptionsSpecified || __sharingOptionsBase is not null
