@@ -172,18 +172,18 @@ Creates an asynchronous generation job from provided text input. Returns a gener
                         var cardOptions = CliRuntime.WasSpecified(parseResult, CardOptions) ? parseResult.GetValue(CardOptions) : (__requestBase is { } __CardOptionsBaseValue ? __CardOptionsBaseValue.CardOptions : default);
                         var folderIds = CliRuntime.WasSpecified(parseResult, FolderIds) ? parseResult.GetValue(FolderIds) : (__requestBase is { } __FolderIdsBaseValue ? __FolderIdsBaseValue.FolderIds : default);
 
-                        var __sharingOptionsBase = __requestBase is { } __SharingOptionsBaseValue ? __SharingOptionsBaseValue.SharingOptions : default;                        var sharingOptionsWorkspaceAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) ? parseResult.GetValue(SharingOptionsOptions.WorkspaceAccess) : (__sharingOptionsBase is { } __SharingOptionsworkspaceAccessBaseValue ? __SharingOptionsworkspaceAccessBaseValue.WorkspaceAccess : default);
-                        var sharingOptionsExternalAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess) ? parseResult.GetValue(SharingOptionsOptions.ExternalAccess) : (__sharingOptionsBase is { } __SharingOptionsexternalAccessBaseValue ? __SharingOptionsexternalAccessBaseValue.ExternalAccess : default);
-                        var __sharingOptionsSpecified = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) || CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess);
+                        var __SharingOptionsBase = __requestBase is { } __SharingOptionsBaseValue ? __SharingOptionsBaseValue.SharingOptions : default;                        var sharingOptionsWorkspaceAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) ? parseResult.GetValue(SharingOptionsOptions.WorkspaceAccess) : (__SharingOptionsBase is { } __SharingOptionsworkspaceAccessBaseValue ? __SharingOptionsworkspaceAccessBaseValue.WorkspaceAccess : default);
+                        var sharingOptionsExternalAccess = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess) ? parseResult.GetValue(SharingOptionsOptions.ExternalAccess) : (__SharingOptionsBase is { } __SharingOptionsexternalAccessBaseValue ? __SharingOptionsexternalAccessBaseValue.ExternalAccess : default);
+                        var __SharingOptionsSpecified = CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.WorkspaceAccess) || CliRuntime.WasSpecified(parseResult, SharingOptionsOptions.ExternalAccess);
                         var sharingOptions =
-                            __sharingOptionsSpecified || __sharingOptionsBase is not null
+                            __SharingOptionsSpecified || __SharingOptionsBase is not null
                                 ? new global::Gamma.SharingOptions
                                 {
 	                                WorkspaceAccess = sharingOptionsWorkspaceAccess,
                                 ExternalAccess = sharingOptionsExternalAccess,
 
                                 }
-                                : __sharingOptionsBase;
+                                : __SharingOptionsBase;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
