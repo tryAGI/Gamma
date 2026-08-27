@@ -9,19 +9,19 @@ namespace Gamma
     public enum EmailOptionsAccess
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Comment,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Edit,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FullAccess,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         View,
     }

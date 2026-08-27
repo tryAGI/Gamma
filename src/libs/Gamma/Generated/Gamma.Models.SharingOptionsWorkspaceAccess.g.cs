@@ -9,23 +9,23 @@ namespace Gamma
     public enum SharingOptionsWorkspaceAccess
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Comment,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Edit,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FullAccess,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         NoAccess,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         View,
     }

@@ -9,39 +9,39 @@ namespace Gamma
     public enum CardOptionsDimensions
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x16x9,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x1x1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x4x3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x4x5,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x9x16,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         A4,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Fluid,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Letter,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pageless,
     }

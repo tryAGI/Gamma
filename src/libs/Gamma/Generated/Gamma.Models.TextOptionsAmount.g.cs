@@ -9,19 +9,19 @@ namespace Gamma
     public enum TextOptionsAmount
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Brief,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Detailed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Extensive,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Medium,
     }

@@ -9,43 +9,43 @@ namespace Gamma
     public enum ImageOptionsSource
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AiGenerated,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Giphy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         NoImages,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pexels,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pictographic,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Placeholder,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ThemeAccent,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         WebAllImages,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         WebFreeToUse,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         WebFreeToUseCommercially,
     }

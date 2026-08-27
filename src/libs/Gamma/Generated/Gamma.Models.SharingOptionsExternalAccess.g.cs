@@ -9,19 +9,19 @@ namespace Gamma
     public enum SharingOptionsExternalAccess
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Comment,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Edit,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         NoAccess,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         View,
     }
