@@ -9,187 +9,187 @@ namespace Gamma
     public enum ImageModel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         DallE3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux1Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux1Quick,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux1Ultra,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux2Flex,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux2Klein,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux2Max,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Flux2Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FluxKontextFast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FluxKontextMax,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FluxKontextPro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gemini25FlashImage,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gemini3ProImage,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gemini3ProImageHd,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gemini31FlashImage,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gemini31FlashImageHd,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gemini31FlashImageMini,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage1High,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage1Medium,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage1MiniHigh,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage1MiniLow,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage1MiniMedium,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage2,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage2Hd,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GptImage2Mini,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         IdeogramV3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         IdeogramV3Quality,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         IdeogramV3Turbo,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Imagen3Flash,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Imagen3Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Imagen4Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Imagen4Ultra,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LeonardoMotion2,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LeonardoMotion2Fast,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LeonardoPhoenix,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LumaPhoton1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LumaPhotonFlash1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LumaRay2,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LumaRay2Flash,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RecraftV3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RecraftV3Svg,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RecraftV4,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RecraftV4Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RecraftV4Svg,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Veo31,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Veo31Fast,
     }

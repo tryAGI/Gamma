@@ -9,19 +9,19 @@ namespace Gamma
     public enum GenerationFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Document,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Presentation,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Social,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Webpage,
     }

@@ -9,11 +9,11 @@ namespace Gamma
     public enum GenerationCardSplit
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         InputTextBreaks,
     }

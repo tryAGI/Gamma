@@ -20,7 +20,7 @@ namespace Gamma.JsonConverters
                     {
                         return global::Gamma.TextOptionsLanguageExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

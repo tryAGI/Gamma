@@ -9,15 +9,15 @@ namespace Gamma
     public enum GenerationTextMode
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Condense,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Generate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Preserve,
     }
