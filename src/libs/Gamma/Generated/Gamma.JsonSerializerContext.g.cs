@@ -68,6 +68,7 @@ namespace Gamma
             typeof(global::Gamma.JsonConverters.UnixTimestampJsonConverter),
         })]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Gamma.JsonSerializerContextTypes))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<object>), TypeInfoPropertyName = "SystemCollectionsGeneric_ObjectList")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Gamma.FromTemplateGeneration))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Gamma.FromTemplateGenerationExportAs), TypeInfoPropertyName = "FromTemplateGenerationExportAs2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(string))]
