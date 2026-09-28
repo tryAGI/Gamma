@@ -82,6 +82,8 @@ internal static partial class PublicApiCreateFromTemplateGenerationCommandApiCom
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"create-from-template-generation", @"Create generation from template
@@ -158,6 +160,7 @@ Creates an asynchronous generation job from a template Gamma with variable subst
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
