@@ -33,6 +33,8 @@ internal static partial class PublicApiGetGenerationStatusCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-generation-status", @"Get generation status
@@ -59,6 +61,7 @@ Retrieves the current status of a generation job. Poll this endpoint until statu
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
