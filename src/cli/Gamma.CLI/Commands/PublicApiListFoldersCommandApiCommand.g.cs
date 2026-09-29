@@ -47,9 +47,9 @@ internal static partial class PublicApiListFoldersCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-folders", @"List folders
+        var command = new Command(commandName ?? @"list-folders", @"List folders
 Lists all folders the authenticated user is a member of within the workspace.");
                         command.Options.Add(Query);
                         command.Options.Add(Limit);

@@ -84,9 +84,9 @@ internal static partial class PublicApiCreateFromTemplateGenerationCommandApiCom
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-from-template-generation", @"Create generation from template
+        var command = new Command(commandName ?? @"create-from-template-generation", @"Create generation from template
 Creates an asynchronous generation job from a template Gamma with variable substitution.");
                         command.Options.Add(ExportAs);
                         command.Options.Add(Prompt);
