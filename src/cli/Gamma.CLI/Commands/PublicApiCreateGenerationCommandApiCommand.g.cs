@@ -119,9 +119,9 @@ internal static partial class PublicApiCreateGenerationCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-generation", @"Create async generation
+        var command = new Command(commandName ?? @"create-generation", @"Create async generation
 Creates an asynchronous generation job from provided text input. Returns a generation ID that can be used to poll for status.");
                         command.Options.Add(TextMode);
                         command.Options.Add(Format);

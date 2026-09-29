@@ -47,9 +47,9 @@ internal static partial class PublicApiListThemesCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-themes", @"List themes
+        var command = new Command(commandName ?? @"list-themes", @"List themes
 Lists all themes available to the workspace, including standard themes and custom workspace themes.");
                         command.Options.Add(Query);
                         command.Options.Add(Limit);

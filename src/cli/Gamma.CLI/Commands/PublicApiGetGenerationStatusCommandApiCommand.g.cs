@@ -35,9 +35,9 @@ internal static partial class PublicApiGetGenerationStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-generation-status", @"Get generation status
+        var command = new Command(commandName ?? @"get-generation-status", @"Get generation status
 Retrieves the current status of a generation job. Poll this endpoint until status is ""completed"" or ""failed"".");
                         command.Arguments.Add(Id);
 
