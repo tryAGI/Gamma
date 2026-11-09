@@ -15,6 +15,18 @@ gamma --help
 gamma public-api --help
 ```
 
+## Shell completion
+
+The `completion` command prints a script built from the live command tree, so
+subcommands, option names and the values of enum-typed options stay correct after the
+spec is refreshed and the CLI regenerated — there is no word list to maintain.
+
+```bash
+gamma completion bash > /usr/local/etc/bash_completion.d/gamma
+gamma completion zsh  > _gamma   # then put it on your zsh fpath
+gamma completion fish > ~/.config/fish/completions/gamma.fish
+```
+
 ## Customization
 
 Generated operation, tag, and API group command classes are partial. Implement
