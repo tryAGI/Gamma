@@ -18,7 +18,7 @@ namespace Gamma.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Gamma.TextOptionsLanguageExtensions.ToEnum(stringValue) ?? default;
+                        return global::Gamma.TextOptionsLanguageExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Gamma.TextOptionsLanguage.");
                     }
 
                     break;
